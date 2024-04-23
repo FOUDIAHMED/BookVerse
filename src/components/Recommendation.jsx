@@ -15,12 +15,16 @@ const Recommendation = () => {
 
   return (
     <div>
-      <h2>Recommended Books</h2>
-      <div className="row">
+      <h2 className="head">Recommended Books</h2>
+      <div className="card-container">
         {recommendedBooks.map((book) => (
           <div key={book.id} className="col-md-12 mb-3">
+             <div className="card">
+                    <div className="card-body">
             <BookInfo book={book} />
           </div>
+        </div>
+      </div>
         ))}
       </div>
     </div>
