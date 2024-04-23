@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import BookInfo from "./components/BookInfo";
 import Reviews from "./components/Reviews";
 import Recommendation from "./components/Recommendation";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css"; // Assuming you have a separate CSS file for styling
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -63,43 +63,46 @@ function App() {
   }, [bookData]);
 
   return (
-    <div className="container">
-      <h1 className="mt-3">Book Search</h1>
-      <input
-        type="text"
-        className="form-control mb-3"
-        value={searchTerm}
-        onChange={handleSearch}
-        placeholder="Enter book title or author"
-      />
+    <div className="container" id="page">
+      <h1 className="mt-3"> Search For Book</h1>
+     
+
+
+<div class="box">
+    <form name="search">
+        <input type="text" pattern=".*\S.*"  id="search" required class="input" name="txt" value={searchTerm}
+   onChange={handleSearch} placeholder=" 🔎​" />
+    </form>
+    <i class="fas fa-search"></i>
+</div>
+
+
       <div className="row">
-        <div className="col-md-8">
-          {bookData.length > 0 && (
-            <>
-              <h2 className="mt-3">Search Results</h2>
-              <div className="row">
-                {bookData.map((book) => (
-                  <div key={book.id} className="col-md-6 mb-3">
-                    <div className="card">
-                      <div className="card-body">
-                        <BookInfo book={book} />
-                        {reviews.length > 0 && <Reviews reviews={reviews} />}
-                        {reviews.length === 0 && (
-                          <p className="text-muted">
-                            No reviews found for this book.
-                          </p>
-                        )}
-                      </div>
+        {bookData.length > 0 && (
+          <>
+            <h2 className="header">Discover worlds between the pages</h2>
+            <div className="card-container"> {/* Wrap cards in card-container */}
+              {bookData.map((book) => (
+                <div key={book.id} className="col-md-3 mb-3"> {/* Use col-md-3 for each book */}
+                  <div className="card">
+                    <div className="card-body">
+                      <BookInfo book={book} />
+                      {reviews.length > 0 && <Reviews reviews={reviews} />}
+                      {reviews.length === 0 && (
+                        <p className="text-muted">
+                          No reviews found for this book.
+                        </p>
+                      )}
                     </div>
                   </div>
-                ))}
-              </div>
-            </>
-          )}
-        </div>
-        <div className="col-md-4">
-          <Recommendation />
-        </div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+      <div className="col-md-4">
+        <Recommendation />
       </div>
     </div>
   );
